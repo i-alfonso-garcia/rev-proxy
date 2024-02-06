@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información de app1</title>
+</head>
+<body>
+  <h1>Información de la APP:</h1>
+  <p>Número de caracteres permitidos: <span id="numCharacters"></span></p>
+  <p>Caracteres permitidos: <span id="allowedCharacters"></span></p>
+  <p>Cadena aleatoria generada: <span id="randomString"></span></p>
+  <p>Fecha y hora: <span id="formattedDate"></span></p>
+
+  <script>
+    async function getInfo() {
+      try {
+        const response = await fetch('/get-info');
+        const data = await response.json();
+
+        document.getElementById('numCharacters').innerText = data.numCharacters;
+        document.getElementById('allowedCharacters').innerText = data.allowedCharacters;
+        document.getElementById('randomString').innerText = data.randomString;
+        document.getElementById('formattedDate').innerText = data.formattedDate;
+      } catch (error) {
+        console.error('Error al obtener la información', error);
+      }
+    }
+
+    // Llama a la función al cargar la página
+    getInfo();
+  </script>
+</body>
+</html>
+
