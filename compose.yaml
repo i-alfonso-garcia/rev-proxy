@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  app1:
+    build:
+      context: ./app-c1
+    image:
+      app1-image
+    container_name:
+      app1
+    networks:
+      - network-app-rv
+    ports:
+      - "3000:80"
+
+  app2:
+    build:
+      context: ./app-c2
+    image:
+      app2-image
+    container_name: 
+      app2
+    networks:
+      - network-app-rv
+    ports:
+      - "3001:80"
+ 
+  reverse-proxy:
+    build:
+      context: ./reverse-proxy
+    image:
+      reverse-proxy-image
+    container_name: 
+      reverse-proxy
+    networks:
+      - network-app-rv
+    ports:
+      - "80:80"
+
+networks:
+  network-app-rv:
+
