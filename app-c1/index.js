@@ -43,6 +43,16 @@ app.get('/api/string-settings', (req, res) => {
   }
 });
 
+app.get('/datos', (req, res) => { 
+  try {
+    const fileContents = fs.readFileSync('config.yml', 'utf8');
+    const configData = yaml.load(fileContents);
+    res.json(configData);
+  } catch (err) {
+    res.status(500).send('Error al leer el archivo de configuración');
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
